@@ -10,7 +10,7 @@
 **Entrada:** Campo de búsqueda de estudiantes  
 **Resultado:** Exposición de toda la base de datos de estudiantes y calificaciones
 
-[CAPTURA: ./img_rojest/sqli_rojest.png]  
+![Captura SQL Injection](./img_rojest/sqli_rojest.png)
 *La captura mostrará el navegador con DVWA y el resultado de la inyección SQL exponiendo todos los registros de la base de datos.*
 
 ---

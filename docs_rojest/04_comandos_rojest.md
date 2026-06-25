@@ -10,7 +10,7 @@
 **Entrada:** Campo de ping o diagnóstico del servidor  
 **Resultado:** Lectura de archivos del sistema y acceso a credenciales
 
-[CAPTURA: ./img_rojest/comandos_rojest.png]  
+![Captura Command Injection](./img_rojest/comandos_rojest.png)
 *La captura mostrará el navegador con DVWA y la salida del comando `/etc/passwd` listando usuarios del sistema.*
 
 ---

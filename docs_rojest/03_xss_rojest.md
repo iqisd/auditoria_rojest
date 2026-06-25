@@ -10,7 +10,7 @@
 **Entrada:** Campo de búsqueda o comentarios  
 **Resultado:** Ejecución de código JavaScript en el navegador de la víctima
 
-[CAPTURA: ./img_rojest/xss_rojest.png]  
+![Captura XSS Reflejado](./img_rojest/xss_rojest.png)
 *La captura mostrará el navegador con DVWA y la ventana alert() apareciendo, demostrando ejecución de JS.*
 
 ---
