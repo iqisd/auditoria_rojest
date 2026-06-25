@@ -10,7 +10,14 @@ export default function XSS() {
         </div>
         <p className="text-slate-200">Entrada: Campo de busqueda o comentarios</p>
         <p className="text-slate-200">Resultado: Ejecucion de codigo JavaScript en el navegador de la victima</p>
-        <p className="text-yellow-400 mt-3">[CAPTURA: ./img_rojest/xss_rojest.png]</p>
+        <div className="mt-4 rounded-lg overflow-hidden border border-slate-600 bg-slate-900">
+          <img
+            src="/img_rojest/xss_rojest.png"
+            alt="Captura de XSS reflejado en DVWA"
+            className="w-full h-auto object-cover"
+          />
+          <p className="text-slate-300 text-sm p-3 bg-slate-950">Captura de pantalla: evidencia de XSS reflejado</p>
+        </div>
       </div>
 
       <div className="bg-slate-700 p-6 rounded">

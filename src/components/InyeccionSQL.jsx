@@ -10,7 +10,14 @@ export default function InyeccionSQL() {
         </div>
         <p className="text-slate-200">Entrada: Campo de busqueda de estudiantes</p>
         <p className="text-slate-200">Resultado: Exposicion de toda la base de datos de estudiantes y calificaciones</p>
-        <p className="text-yellow-400 mt-3">[CAPTURA: ./img_rojest/sqli_rojest.png]</p>
+        <div className="mt-4 rounded-lg overflow-hidden border border-slate-600 bg-slate-900">
+          <img
+            src="/img_rojest/sqli_rojest.png"
+            alt="Captura de inyeccion SQL en DVWA"
+            className="w-full h-auto object-cover"
+          />
+          <p className="text-slate-300 text-sm p-3 bg-slate-950">Captura de pantalla: resultado del ataque SQL Injection</p>
+        </div>
       </div>
 
       <div className="bg-slate-700 p-6 rounded">
