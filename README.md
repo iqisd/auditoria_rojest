@@ -17,6 +17,7 @@ Auditoria técnica de seguridad para el portal web educativo **PreuFuturo Preuni
 - **Controles Preventivos**: Políticas, frameworks y medidas de seguridad recomendadas
 - **Plan de Recuperación**: Estrategia de disaster recovery (DR) y respuesta ante incidentes
 - **Bitácora de IA**: Documentación del uso de GitHub Copilot y reflexión crítica
+- **Resultados de Pruebas**: Resumen de resultados y evidencia de pruebas de seguridad
 - **Evidencias DVWA**: Capturas de ataques en SQLi, XSS y Command Injection
 
 ---
@@ -82,6 +83,8 @@ auditoria_rojest/
 │   ├── 06_matriz_rojest.md          # Documentación: Matriz de Riesgo
 │   ├── 07_controles_rojest.md       # Documentación: Controles
 │   ├── 08_recuperacion_rojest.md    # Documentación: DR Plan
+│   ├── 09_prompts_rojest.md         # Documentación de uso de IA
+│   ├── 10_resultados_pruebas_rojest.md # Documentación de resultados de pruebas
 │   └── img_rojest/                  # Imágenes y evidencia de ataques
 ├── vite.config.js                   # Configuración Vite
 ├── tailwind.config.js               # Configuración Tailwind CSS
