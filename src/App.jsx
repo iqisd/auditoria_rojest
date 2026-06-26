@@ -147,7 +147,7 @@ export default function App() {
       <footer className="bg-slate-950 border-t border-slate-700 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-slate-400 text-center text-sm">
-            Auditoria realizada por Esteban Rojas - TI3034 Fundamentos de Seguridad - INACAP Valparaiso - Junio 2026
+            Hecho por iqis · <a href="https://github.com/iqisd" target="_blank" rel="noreferrer" className="text-red-400 hover:text-red-300">iqisd</a>
           </p>
         </div>
       </footer>
