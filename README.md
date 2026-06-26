@@ -17,6 +17,7 @@ Auditoria técnica de seguridad para el portal web educativo **PreuFuturo Preuni
 - **Controles Preventivos**: Políticas, frameworks y medidas de seguridad recomendadas
 - **Plan de Recuperación**: Estrategia de disaster recovery (DR) y respuesta ante incidentes
 - **Bitácora de IA**: Documentación del uso de GitHub Copilot y reflexión crítica
+- **Evidencias DVWA**: Capturas de ataques en SQLi, XSS y Command Injection
 
 ---
 
@@ -56,6 +57,8 @@ npm run preview
 
 ```
 auditoria_rojest/
+├── public/
+│   └── img_rojest/                 # Imágenes placeholder de evidencia DVWA
 ├── src/
 │   ├── App.jsx                      # Componente principal con navegación
 │   ├── components/
@@ -180,6 +183,16 @@ Este proyecto utilizó **GitHub Copilot** como herramienta de soporte para:
 **Importante**: Ver sección "Prompts" en la aplicación para reflexión crítica sobre uso responsable de IA. **La responsabilidad técnica es siempre del auditor.**
 
 ---
+
+## 🖼 Evidencias y Capturas
+
+Las capturas placeholder de la auditoría se encuentran en:
+
+- `public/img_rojest/sqli_rojest.png`
+- `public/img_rojest/xss_rojest.png`
+- `public/img_rojest/comandos_rojest.png`
+
+Estos archivos se utilizan en los componentes React para mostrar evidencia visual del ataque.
 
 ## 🌐 Despliegue (Vercel)
 
