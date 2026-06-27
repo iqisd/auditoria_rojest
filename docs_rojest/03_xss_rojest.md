@@ -11,7 +11,7 @@
 **Resultado:** Ejecución de código JavaScript en el navegador de la víctima
 
 ![Captura XSS Reflejado](../public/img_rojest/xss_rojest.png)
-*La captura mostrará el navegador con DVWA y la ventana alert() apareciendo, demostrando ejecución de JS.*
+*La captura evidencia el navegador con DVWA y la ventana alert() apareciendo, demostrando ejecución de JS.*
 
 ---
 
