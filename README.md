@@ -59,7 +59,7 @@ npm run preview
 ```
 auditoria_rojest/
 ├── public/
-│   └── img_rojest/                 # Imágenes placeholder de evidencia DVWA
+│   └── img_rojest/                 # Capturas reales de evidencia DVWA
 ├── src/
 │   ├── App.jsx                      # Componente principal con navegación
 │   ├── components/
@@ -189,7 +189,7 @@ Este proyecto utilizó **GitHub Copilot** como herramienta de soporte para:
 
 ## 🖼 Evidencias y Capturas
 
-Las capturas placeholder de la auditoría se encuentran en:
+Las capturas reales de la auditoría se encuentran en:
 
 - `public/img_rojest/ # Capturas reales de evidencia DVWA`
 
