@@ -1,8 +1,46 @@
-import { useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { ChevronLeft, ChevronRight, Download } from 'lucide-react'
+import html2pdf from 'html2pdf.js'
 
 export default function Presentacion() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [images, setImages] = useState({
+    sqli: null,
+    xss: null,
+    comandos: null,
+  })
+  const pdfRef = useRef()
+
+  // Cargar imágenes como base64
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const loadImage = async (path) => {
+          const response = await fetch(path)
+          const blob = await response.blob()
+          return new Promise((resolve) => {
+            const reader = new FileReader()
+            reader.onloadend = () => resolve(reader.result)
+            reader.readAsDataURL(blob)
+          })
+        }
+
+        const sqliImage = await loadImage('/img_rojest/sqli_rojest.png')
+        const xssImage = await loadImage('/img_rojest/xss_rojest.png')
+        const comandosImage = await loadImage('/img_rojest/comandos_rojest.png')
+
+        setImages({
+          sqli: sqliImage,
+          xss: xssImage,
+          comandos: comandosImage,
+        })
+      } catch (error) {
+        console.error('Error loading images:', error)
+      }
+    }
+
+    loadImages()
+  }, [])
 
   const slides = [
     // Slide 1: Portada
@@ -319,6 +357,197 @@ export default function Presentacion() {
     setCurrentSlide(prev => (prev === slides.length - 1 ? 0 : prev + 1))
   }
 
+  const exportToPDF = () => {
+    const element = document.createElement('div')
+    element.style.padding = '20px'
+    element.style.backgroundColor = '#0f172a'
+    element.style.color = '#ffffff'
+    
+    // Crear contenido HTML para PDF
+    let htmlContent = `
+      <div style="font-family: Arial, sans-serif; color: #ffffff; background-color: #0f172a; padding: 20px;">
+        <h1 style="text-align: center; color: #ef4444; border-bottom: 3px solid #ef4444; padding-bottom: 10px;">
+          AUDITORÍA DE SEGURIDAD WEB - PRESENTACIÓN EVALUACIÓN 03
+        </h1>
+        <h2 style="text-align: center; color: #94a3b8; margin-top: 30px;">PreuFuturo Preuniversitario</h2>
+        <p style="text-align: center; color: #cbd5e1; margin-top: 40px;">Estudiante: <strong>Esteban Rojas</strong></p>
+        <p style="text-align: center; color: #cbd5e1;">Asignatura: <strong>TI3034 — Fundamentos de Seguridad de la Información</strong></p>
+        <p style="text-align: center; color: #cbd5e1;">Junio 2026</p>
+        
+        <div style="page-break-after: always; margin-top: 50px;"></div>
+    `
+    
+    slides.forEach((slide, idx) => {
+      htmlContent += `
+        <div style="page-break-after: always; margin-bottom: 30px;">
+          <h2 style="color: #ef4444; border-bottom: 2px solid #ef4444; padding-bottom: 10px;">
+            Diapositiva ${idx + 1}: ${slide.title}
+          </h2>
+          <h3 style="color: #60a5fa; margin-top: 10px;">${slide.subtitle}</h3>
+          <div style="margin-top: 20px; color: #cbd5e1; line-height: 1.6;">
+      `
+      
+      // Agregar contenido de texto de cada slide
+      switch(idx) {
+        case 0:
+          htmlContent += `
+            <p><strong>Evaluación 03</strong></p>
+            <p>Asignatura: TI3034 — Fundamentos de Seguridad de la Información</p>
+            <p>Estudiante: <strong>Esteban Rojas</strong></p>
+            <p>Junio 2026</p>
+          `
+          break
+        case 1:
+          htmlContent += `
+            <p><strong>PreuFuturo</strong> es un portal educativo ficticio que gestiona:</p>
+            <ul style="margin-left: 20px;">
+              <li>Perfiles y cuentas de estudiantes y administrativos</li>
+              <li>Calificaciones y evaluaciones académicas</li>
+              <li>Transacciones de pagos y matrículas</li>
+              <li>Material académico y recursos educativos</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>Objetivo:</strong> Evaluar riesgos de seguridad en un ambiente controlado usando DVWA.</p>
+          `
+          break
+        case 2:
+          htmlContent += `
+            <ul style="margin-left: 20px;">
+              <li>Evaluar tres vulnerabilidades web críticas</li>
+              <li>Documentar evidencia técnica de cada hallazgo</li>
+              <li>Calcular severidad usando CVSS 3.1</li>
+              <li>Construir matriz de riesgo y priorización</li>
+              <li>Proponer medidas de prevención y mitigación</li>
+              <li>Definir plan de recuperación ante incidentes</li>
+            </ul>
+          `
+          break
+        case 3:
+          htmlContent += `
+            <p><strong>Payload:</strong> ' OR '1'='1</p>
+            <p><strong>CVSS:</strong> 9.8 — Crítica</p>
+            <p><strong>Impacto:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Exposición de datos de estudiantes</li>
+              <li>Acceso a calificaciones y pagos</li>
+              <li>Compromiso de confidencialidad</li>
+            </ul>
+            ${images.sqli ? `<p style="margin-top: 15px;"><strong>Evidencia:</strong></p><img src="${images.sqli}" style="max-width: 100%; height: auto; border: 1px solid #475569; margin-top: 10px;">` : '<p style="margin-top: 15px; color: #94a3b8;"><em>Imagen de evidencia no disponible</em></p>'}
+          `
+          break
+        case 4:
+          htmlContent += `
+            <p><strong>Payload:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;</p>
+            <p><strong>CVSS:</strong> 8.2 — Alta</p>
+            <p><strong>Impacto:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Ejecución de JavaScript en navegador</li>
+              <li>Riesgo de robo de sesión</li>
+              <li>Ataques de phishing</li>
+            </ul>
+            ${images.xss ? `<p style="margin-top: 15px;"><strong>Evidencia:</strong></p><img src="${images.xss}" style="max-width: 100%; height: auto; border: 1px solid #475569; margin-top: 10px;">` : '<p style="margin-top: 15px; color: #94a3b8;"><em>Imagen de evidencia no disponible</em></p>'}
+          `
+          break
+        case 5:
+          htmlContent += `
+            <p><strong>Payload:</strong> 127.0.0.1; cat /etc/passwd</p>
+            <p><strong>CVSS:</strong> 9.8 — Crítica</p>
+            <p><strong>Impacto:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Ejecución de comandos del SO</li>
+              <li>Exposición de archivos sensibles</li>
+              <li>Compromiso total del servidor</li>
+            </ul>
+            ${images.comandos ? `<p style="margin-top: 15px;"><strong>Evidencia:</strong></p><img src="${images.comandos}" style="max-width: 100%; height: auto; border: 1px solid #475569; margin-top: 10px;">` : '<p style="margin-top: 15px; color: #94a3b8;"><em>Imagen de evidencia no disponible</em></p>'}
+          `
+          break
+        case 6:
+          htmlContent += `
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+              <tr style="background-color: #1e293b; border: 1px solid #475569;">
+                <th style="padding: 10px; text-align: left; color: #ef4444; border: 1px solid #475569;">Vulnerabilidad</th>
+                <th style="padding: 10px; text-align: left; color: #ef4444; border: 1px solid #475569;">CVSS</th>
+                <th style="padding: 10px; text-align: left; color: #ef4444; border: 1px solid #475569;">Riesgo</th>
+              </tr>
+              <tr style="background-color: #0f172a; border: 1px solid #475569;">
+                <td style="padding: 10px; border: 1px solid #475569;">SQL Injection</td>
+                <td style="padding: 10px; border: 1px solid #475569;">9.8</td>
+                <td style="padding: 10px; border: 1px solid #475569; color: #dc2626;">Crítico</td>
+              </tr>
+              <tr style="background-color: #1e293b; border: 1px solid #475569;">
+                <td style="padding: 10px; border: 1px solid #475569;">Command Injection</td>
+                <td style="padding: 10px; border: 1px solid #475569;">9.8</td>
+                <td style="padding: 10px; border: 1px solid #475569; color: #dc2626;">Crítico</td>
+              </tr>
+              <tr style="background-color: #0f172a; border: 1px solid #475569;">
+                <td style="padding: 10px; border: 1px solid #475569;">XSS Reflected</td>
+                <td style="padding: 10px; border: 1px solid #475569;">8.2</td>
+                <td style="padding: 10px; border: 1px solid #475569; color: #ea580c;">Alto</td>
+              </tr>
+            </table>
+          `
+          break
+        case 7:
+          htmlContent += `
+            <p><strong>SQL Injection:</strong> Consultas parametrizadas • Validación de entradas • Mínimo privilegio en BD</p>
+            <p><strong>XSS:</strong> Escape de salida HTML • Sanitización de datos • Content Security Policy</p>
+            <p><strong>Command Injection:</strong> Evitar comandos del SO • Listas blancas de entrada • Validación estricta</p>
+            <p><strong>Transversales:</strong> WAF • Logging y monitoreo • SIEM • Pruebas de seguridad periódicas</p>
+          `
+          break
+        case 8:
+          htmlContent += `
+            <p><strong>Acciones Inmediatas:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>Aislamiento del servidor afectado</li>
+              <li>Restauración desde respaldos</li>
+              <li>Revisión completa de logs</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>Métricas de Recuperación:</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>RTO (Objetivo de Tiempo de Recuperación): 2 horas</li>
+              <li>RPO (Punto de Recuperación Objetivo): 4 horas</li>
+            </ul>
+          `
+          break
+        case 9:
+          htmlContent += `
+            <p>✓ La auditoría identificó <strong>vulnerabilidades críticas</strong> que requieren atención inmediata.</p>
+            <p style="margin-top: 10px;">⚠️ Los riesgos principales afectan <strong>confidencialidad, integridad y disponibilidad</strong> de datos.</p>
+            <p style="margin-top: 10px;">🎯 Prioridad: Remediar <strong>SQL Injection</strong> y <strong>Command Injection</strong> de inmediato.</p>
+            <p style="margin-top: 15px; color: #fca5a5;"><strong>La implementación de controles preventivos y planes de recuperación reduce significativamente el riesgo operacional de PreuFuturo.</strong></p>
+          `
+          break
+        default:
+          break
+      }
+      
+      htmlContent += `
+          </div>
+        </div>
+      `
+    })
+    
+    htmlContent += `
+        <div style="page-break-after: avoid; margin-top: 50px; text-align: center; border-top: 2px solid #475569; padding-top: 20px;">
+          <p style="color: #64748b;">Documento generado automáticamente desde la Presentación Evaluación 03</p>
+          <p style="color: #64748b; font-size: 12px;">PreuFuturo Preuniversitario - Auditoría de Seguridad Web</p>
+        </div>
+      </div>
+    `
+    
+    element.innerHTML = htmlContent
+    
+    const opt = {
+      margin: 10,
+      filename: 'Auditoria_Seguridad_PreuFuturo_Presentacion.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' },
+    }
+    
+    html2pdf().set(opt).from(element).save()
+  }
+
   const currentSlideData = slides[currentSlide]
 
   return (
@@ -355,7 +584,7 @@ export default function Presentacion() {
         </div>
 
         {/* Navigation */}
-        <div className="relative z-10 flex items-center justify-between">
+        <div className="relative z-10 flex items-center justify-between gap-4">
           <button
             onClick={goToPrevious}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-600 bg-slate-700/50 text-slate-300 hover:bg-slate-600 hover:text-white hover:border-slate-500 transition font-medium"
@@ -380,14 +609,26 @@ export default function Presentacion() {
             ))}
           </div>
 
-          <button
-            onClick={goToNext}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-600 bg-slate-700/50 text-slate-300 hover:bg-slate-600 hover:text-white hover:border-slate-500 transition font-medium"
-            aria-label="Siguiente diapositiva"
-          >
-            Siguiente
-            <ChevronRight size={20} />
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={exportToPDF}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-600 bg-blue-700/50 text-blue-300 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition font-medium"
+              aria-label="Descargar presentación como PDF"
+              title="Descargar presentación en PDF"
+            >
+              <Download size={20} />
+              PDF
+            </button>
+
+            <button
+              onClick={goToNext}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-600 bg-slate-700/50 text-slate-300 hover:bg-slate-600 hover:text-white hover:border-slate-500 transition font-medium"
+              aria-label="Siguiente diapositiva"
+            >
+              Siguiente
+              <ChevronRight size={20} />
+            </button>
+          </div>
         </div>
       </div>
 
