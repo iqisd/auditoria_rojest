@@ -9,6 +9,7 @@ import Matriz from './components/Matriz'
 import Controles from './components/Controles'
 import Recuperacion from './components/Recuperacion'
 import Prompts from './components/Prompts'
+import Presentacion from './components/Presentacion'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -16,6 +17,7 @@ export default function App() {
 
   const sections = [
     { id: 'resumen', name: 'Resumen', component: Resumen },
+    { id: 'presentacion', name: 'Presentación Evaluación 03', component: Presentacion },
     { id: 'sqli', name: 'SQL Injection', component: InyeccionSQL },
     { id: 'xss', name: 'XSS', component: XSS },
     { id: 'comandos', name: 'Command Injection', component: Comandos },
