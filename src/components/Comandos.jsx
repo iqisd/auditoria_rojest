@@ -16,7 +16,7 @@ export default function Comandos() {
             alt="Captura de inyeccion de comandos en DVWA"
             className="w-full h-auto object-cover"
           />
-          <p className="text-slate-300 text-sm p-3 bg-slate-950">Captura de pantalla: evidencia de inyeccion de comandos</p>
+          <p className="text-slate-300 text-sm p-3 bg-slate-950">Captura de pantalla: ejecución del payload de inyección de comandos, evidenciando acceso al contenido del archivo /etc/passwd del servidor.</p>
         </div>
       </div>
 

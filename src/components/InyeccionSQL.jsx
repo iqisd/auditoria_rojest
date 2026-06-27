@@ -16,7 +16,7 @@ export default function InyeccionSQL() {
             alt="Captura de inyeccion SQL en DVWA"
             className="w-full h-auto object-cover"
           />
-          <p className="text-slate-300 text-sm p-3 bg-slate-950">Captura de pantalla: resultado del ataque SQL Injection</p>
+          <p className="text-slate-300 text-sm p-3 bg-slate-950">Captura de pantalla: ejecución de inyección SQL con el payload ' OR '1'='1, evidenciando la exposición de múltiples registros de usuarios desde la base de datos.</p>
         </div>
       </div>
 

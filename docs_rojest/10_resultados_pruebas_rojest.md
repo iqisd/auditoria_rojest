@@ -17,7 +17,7 @@ Las pruebas se realizaron en un entorno controlado y con evidencias placeholder 
 - **Aplicación**: Proyecto local de auditoría con componentes React y documentos de análisis
 - **Repositorio**: `https://github.com/iqisd/auditoria_rojest`
 - **Servidor de desarrollo**: `npm run dev` en **http://localhost:5173**
-- **Imágenes de evidencia**: `public/img_rojest/` y `docs_rojest/img_rojest/`
+- **Imágenes de evidencia**: `../public/img_rojest/`
 - **Herramientas usadas**:
   - Navegador web moderno
   - Inspección de redes y código fuente
@@ -31,21 +31,21 @@ Las pruebas se realizaron en un entorno controlado y con evidencias placeholder 
 
 - **Prueba**: Ingreso del payload ` ' OR '1'='1 ` en el campo de búsqueda de estudiantes.
 - **Resultado esperado**: La aplicación vulnerable debe devolver todos los registros de la base de datos sin filtrar.
-- **Evidencia**: `docs_rojest/img_rojest/sqli_rojest.png`
+- **Evidencia**: `../public/img_rojest/sqli_rojest.png`
 - **Observación**: La consulta SQL concatenada sin parametrización permite que la condición siempre verdadera exponga datos sensibles.
 
 ### 3.2 Cross-Site Scripting (XSS)
 
 - **Prueba**: Ingreso del payload `<script>alert('XSS')</script>` en el campo de búsqueda o comentarios.
 - **Resultado esperado**: El navegador ejecuta el script, mostrando un `alert()` en la sesión de la víctima.
-- **Evidencia**: `docs_rojest/img_rojest/xss_rojest.png`
+- **Evidencia**: `../public/img_rojest/xss_rojest.png`
 - **Observación**: La salida no codificada permite la inyección de HTML/JS, afectando confidencialidad e integridad.
 
 ### 3.3 Command Injection
 
 - **Prueba**: Ingreso del payload `127.0.0.1; cat /etc/passwd` en el campo de ping o diagnóstico.
 - **Resultado esperado**: El comando `cat /etc/passwd` se ejecuta junto con `ping`, mostrando contenido del sistema.
-- **Evidencia**: `docs_rojest/img_rojest/comandos_rojest.png`
+- **Evidencia**: `../public/img_rojest/comandos_rojest.png`
 - **Observación**: El uso de `shell_exec` con entrada de usuario permite ejecución arbitraria de comandos.
 
 ---

@@ -16,7 +16,7 @@ export default function XSS() {
             alt="Captura de XSS reflejado en DVWA"
             className="w-full h-auto object-cover"
           />
-          <p className="text-slate-300 text-sm p-3 bg-slate-950">Captura de pantalla: evidencia de XSS reflejado</p>
+          <p className="text-slate-300 text-sm p-3 bg-slate-950">Captura de pantalla: ejecución del payload XSS reflejado, evidenciando la alerta generada en el navegador de la víctima.</p>
         </div>
       </div>
 
