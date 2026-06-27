@@ -191,9 +191,7 @@ Este proyecto utilizó **GitHub Copilot** como herramienta de soporte para:
 
 Las capturas placeholder de la auditoría se encuentran en:
 
-- `public/img_rojest/sqli_rojest.png`
-- `public/img_rojest/xss_rojest.png`
-- `public/img_rojest/comandos_rojest.png`
+- `public/img_rojest/ # Capturas reales de evidencia DVWA`
 
 Estos archivos se utilizan en los componentes React para mostrar evidencia visual del ataque.
 
