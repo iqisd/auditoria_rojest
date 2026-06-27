@@ -124,7 +124,7 @@ auditoria_rojest/
 | Command Injection | 9.8 | **CRÍTICA** | Ejecución de comandos OS, compromiso total del servidor |
 
 ### Contexto Regulatorio
-- **Ley 21.459**: Regulación de educación parvularia (aplica a PreuFuturo)
+- **Ley 21.459**: Ley de delitos informáticos.
 - **Ley 19.628**: Protección de datos personales (menores de edad)
 - **Ley 21.611**: Antidiscriminación en educación
 
